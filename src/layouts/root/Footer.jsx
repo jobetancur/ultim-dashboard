@@ -44,7 +44,7 @@ export default function Footer() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <FlexBox alignItems="center" gap={1} mb={2}>
-              <Box alt="logo" width={40} height={40} component="img" src="/static/logo/logo-svg.svg" />
+              <Box alt="logo" width={40} height={40} component="img" src="/static/logo/logo-ultim-violeta.png" />
 
               <Paragraph fontSize={28} fontWeight={600}>
                 Uko

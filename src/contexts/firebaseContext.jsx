@@ -87,7 +87,7 @@ export const AuthProvider = ({
             role: userDoc.data().role,
             email: user.email,
             avatar: user.photoURL,
-            name: userDoc.data().firstName || user.email
+            name: `${userDoc.data().firstName} ${userDoc.data().lastName}`
           }
         };
         dispatch({

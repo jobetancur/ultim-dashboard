@@ -106,7 +106,7 @@ export default function Navigation() {
             <ListItem sx={{
             mb: 1
           }}>
-              <img src="/static/logo/logo-svg.svg" alt="logo" width={40} height={40} />
+              <img src="/static/logo/logo-ultim-violeta.png" alt="logo" width={40} height={40} />
             </ListItem>
 
             <ListItem disablePadding>
@@ -173,7 +173,7 @@ export default function Navigation() {
   return <StyledRoot>
       {/* UKO LOGO */}
       <Link href="/">
-        <img src="/static/logo/logo-svg.svg" alt="logo" width={35} height={35} />
+        <img src="/static/logo/logo-ultim-violeta.png" alt="logo" width={35} height={35} />
       </Link>
 
       {isMedium ? LARGE_DEVICE_CONTENT : SMALL_DEVICE_CONTENT}

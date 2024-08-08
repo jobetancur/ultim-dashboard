@@ -26,7 +26,7 @@ export default function LayoutSideBar() {
   const MAIN_SIDEBAR_CONTENT = <Fragment>
       {/* SIDEBAR LOGO */}
       <LogoBox>
-        <Box component="img" src="/static/logo/logo-svg.svg" alt="logo" width={30} />
+        <Box component="img" src="/static/logo/logo-ultim-violeta.png" alt="logo" width={30} />
       </LogoBox>
 
       {/* NAVIGATION LIST WITH ICON */}
