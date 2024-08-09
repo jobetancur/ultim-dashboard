@@ -11,38 +11,38 @@ import { Paragraph, Small } from '@/components/typography';
 import Apps from '@/icons/duotone/Apps';
 
 // DUMMY DATA SET
-const SERVICES = [{
-  id: 1,
-  title: 'Slack',
-  body: 'Email collaboration software',
-  image: '/static/connect-accounts/slack.svg'
-}, {
-  id: 2,
-  title: 'Github',
-  body: 'Email collaboration software',
-  image: '/static/connect-accounts/github.svg'
-}, {
-  id: 3,
-  title: 'Stack Overflow',
-  body: 'Email collaboration software',
-  image: '/static/connect-accounts/stack-overflow.svg'
-}];
+// const SERVICES = [{
+//   id: 1,
+//   title: 'Slack',
+//   body: 'Email collaboration software',
+//   image: '/static/connect-accounts/slack.svg'
+// }, {
+//   id: 2,
+//   title: 'Github',
+//   body: 'Email collaboration software',
+//   image: '/static/connect-accounts/github.svg'
+// }, {
+//   id: 3,
+//   title: 'Stack Overflow',
+//   body: 'Email collaboration software',
+//   image: '/static/connect-accounts/stack-overflow.svg'
+// }];
 export default function ServicePopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   return <Fragment>
-      <IconButton ref={anchorRef} onClick={() => setOpen(true)}>
+      {/* <IconButton ref={anchorRef} onClick={() => setOpen(true)}>
         <Badge color="error" badgeContent={0}>
           <Apps sx={{
           color: 'grey.400',
           fontSize: 18
         }} />
         </Badge>
-      </IconButton>
+      </IconButton> */}
 
-      <PopoverLayout hiddenViewButton popoverOpen={open} anchorRef={anchorRef} title="Web apps & services" popoverClose={() => setOpen(false)}>
+      {/* <PopoverLayout hiddenViewButton popoverOpen={open} anchorRef={anchorRef} title="Web apps & services" popoverClose={() => setOpen(false)}>
         {SERVICES.map(service => <ListItem key={service.id} body={service.body} image={service.image} title={service.title} />)}
-      </PopoverLayout>
+      </PopoverLayout> */}
     </Fragment>;
 }
 

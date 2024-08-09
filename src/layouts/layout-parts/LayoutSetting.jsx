@@ -89,9 +89,9 @@ export default function LayoutSetting() {
     });
   };
   return <Fragment>
-      <StyledButton color="primary" onClick={() => setOpen(true)}>
+      {/* <StyledButton color="primary" onClick={() => setOpen(true)}>
         Layouts
-      </StyledButton>
+      </StyledButton> */}
 
       <CustomDrawer open={open} anchor="right" elevation={3} variant="persistent" onClose={() => setOpen(false)}>
         <FlexBox alignItems="center" justifyContent="space-between" px={2} py={1}>
