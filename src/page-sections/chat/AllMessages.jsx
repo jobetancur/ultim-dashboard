@@ -7,8 +7,9 @@ import Scrollbar from '@/components/scrollbar';
 import FlexBox from '@/components/flexbox/FlexBox';
 import { Paragraph } from '@/components/typography';
 // CUSTOM DUMMY DATA
-import { RECENT_CHATS } from '@/__fakeData__/chats';
-export default function AllMessages() {
+
+export default function AllMessages({ chatHistory, handlerChatClick }) {
+
   return <Box mt={3}>
       <FlexBox alignItems="center" gap={1} px={3} mb={1}>
         <PushPin sx={{
@@ -21,9 +22,10 @@ export default function AllMessages() {
       </FlexBox>
 
       <Scrollbar style={{
-      maxHeight: 400
+      maxHeight: 570
     }}>
-        {RECENT_CHATS.map(item => <ChatItem id={item.id} key={item.id} name={item.name} time={item.time} image={item.image} lastMsg={item.lastMsg} unseenMsg={item.unseenMsg} lastMsgSeen={item.lastMsgSeen} isLastMsgIncoming={item.isLastMsgIncoming} />)}
+        {chatHistory.map(item => <ChatItem id={item.id} key={item.id} item={item} handlerChatClick={handlerChatClick} />)}
+        {/* {chatHistory.map(item => <ChatItem id={id} key={id} clientNumber={client_number} time={created_at} messages={messages} lastMsg={item.lastMsg} unseenMsg={item.unseenMsg} lastMsgSeen={item.lastMsgSeen} isLastMsgIncoming={item.isLastMsgIncoming} />)} */}
       </Scrollbar>
     </Box>;
 }

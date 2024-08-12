@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useMemo } from 'react';
+import { useContext, useEffect, useState } from 'react';
 // MUI
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -18,6 +19,9 @@ import SearchInput from '@/components/search-input';
 import FlexBetween from '@/components/flexbox/FlexBetween';
 // CUSTOM UTIL METHOD
 import { isDark } from '@/utils/constants';
+// SUPABASE CONTEXT
+import { createClient } from '@supabase/supabase-js';
+import { AuthContext } from '@/contexts/firebaseContext';
 
 // STYLED COMPONENTS
 const StyledSearchInput = styled(SearchInput)(({
@@ -33,9 +37,46 @@ const StyledIconButton = styled(IconButton)(({
   border: `1px solid ${theme.palette.divider}`
 }));
 export default function ChatPageView() {
+  const { user } = useContext(AuthContext);
+  const [chatHistory, setChatHistory] = useState([]);
   const [openLeftDrawer, setOpenLeftDrawer] = useState(false);
+  const [selectedConversationId, setSelectedConversationId] = useState(null);
   const downMd = useMediaQuery(theme => theme.breakpoints.down('md'));
   const handleOpen = () => setOpenLeftDrawer(true);
+
+    const supabaseUrl = user?.supabaseUrl;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    
+    const supabase = useMemo(() => createClient(supabaseUrl, supabaseKey), [supabaseUrl, supabaseKey]);
+
+  useEffect(() => {
+    const fetchChatHistory = async () => {
+      if (supabase) {
+        const { data, error } = await supabase
+          .from('chat_history')
+          .select('id, client_number, messages, created_at');
+
+        if (error) {
+          console.error('Error fetching chat history:', error);
+        } else {
+          setChatHistory(data);
+        }
+      }
+    };
+
+    fetchChatHistory();
+  }, [supabase]);
+
+  // console.log(chatHistory);
+
+  const handlerChatClick = id => {
+    setSelectedConversationId(id);
+  };
+
+   // Filter chat history based on the selected conversation
+   const filteredChatHistory = chatHistory.filter(chat => chat.id === selectedConversationId);
+
+  //  console.log(filteredChatHistory);
 
   // RECENT CONVERSATION LIST
   const MESSAGE_CONTENT = <Card sx={{
@@ -46,21 +87,25 @@ export default function ChatPageView() {
         <FlexBetween mb={3}>
           <H6 fontSize={18}>Messages</H6>
 
-          <StyledIconButton size="small">
+          {/* <StyledIconButton size="small">
             <Add />
-          </StyledIconButton>
+          </StyledIconButton> */}
         </FlexBetween>
 
         <StyledSearchInput placeholder="Search..." />
       </div>
 
       {/* PINNED ITEMS */}
-      <PinChats />
+      {/* <PinChats /> */}
 
       <Divider />
 
       {/* ALL MESSAGES */}
-      <AllMessages />
+      <AllMessages 
+        chatHistory={chatHistory}  
+        handlerChatClick={handlerChatClick}
+      />
+
     </Card>;
   return <div className="pt-2 pb-4">
       <Grid container spacing={3}>
@@ -73,7 +118,13 @@ export default function ChatPageView() {
           </Grid>}
 
         <Grid item xl={8} md={8} xs={12}>
-          <Conversation handleOpen={handleOpen} />
+          {
+            selectedConversationId ? <Conversation chatHistory={filteredChatHistory} /> : <Card className="h-full">
+                <Box padding={3}>
+                  <H6 fontSize={18}>Selecciona una conversación</H6>
+                </Box>
+              </Card>
+          }
         </Grid>
       </Grid>
     </div>;

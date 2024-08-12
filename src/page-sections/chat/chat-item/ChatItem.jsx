@@ -11,39 +11,47 @@ import { UnseenMsgWrapper, Wrapper } from './styles';
 
 // ===============================================================
 
-export default function ChatItem(props) {
-  const {
-    name,
-    time,
-    image,
-    lastMsg,
-    unseenMsg,
-    lastMsgSeen,
-    isLastMsgIncoming
-  } = props;
-  return <Wrapper>
-      <Avatar src={image} />
+export default function ChatItem({ item, handlerChatClick }) {
+  
+  // console.log(item);
+  const lastMsg = item.messages[item.messages.length - 1].message;
 
-      <div className="chat-info">
+  // Hora del último mensaje
+  const lastMsgTime = item.messages[item.messages.length - 1].date;
+
+  // Obtener máximo 50 carácteres del último mensaje
+  let lastShortMsg = '';
+  if(lastMsg) {
+    lastShortMsg = lastMsg.length > 40 ? lastMsg.substring(0, 40) + '...' : lastMsg;
+  }
+
+  const handlerLocalChatClick = () => {
+    handlerChatClick(item.id);
+  }
+
+  return <Wrapper>
+      <Avatar src={item.image} />
+
+      <div className="chat-info" onClick={handlerLocalChatClick}>
         <FlexBetween>
-          <Paragraph fontWeight={500}>{name}</Paragraph>
+          <Paragraph fontWeight={500}>{item.client_number}</Paragraph>
           <Paragraph fontSize={12} color="text.secondary">
-            {formatDistanceToNowStrict(new Date(time))} ago
+            {formatDistanceToNowStrict(lastMsgTime)} ago
           </Paragraph>
         </FlexBetween>
 
         <FlexBetween mt={0.5}>
           <Paragraph fontSize={12} color="text.secondary">
-            {!isLastMsgIncoming ? <Span color="text.primary">You: </Span> : null}
-            {lastMsg}
+            {/* Mostrar máximo 50 carácteres del último mensaje */}
+            {lastShortMsg}
           </Paragraph>
 
-          {unseenMsg ? <UnseenMsgWrapper>
+          {/* {unseenMsg ? <UnseenMsgWrapper>
               <Small fontWeight={500}>{unseenMsg}</Small>
             </UnseenMsgWrapper> : <DoneAll sx={{
           fontSize: 18,
           color: lastMsgSeen ? 'primary.main' : 'grey.400'
-        }} />}
+        }} />} */}
         </FlexBetween>
       </div>
     </Wrapper>;

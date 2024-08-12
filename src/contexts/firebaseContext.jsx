@@ -80,6 +80,22 @@ export const AuthProvider = ({
         const querySnapshot = await getDocs(q);
         const userDoc = querySnapshot.docs[0];
 
+        // Obtener la organización del usuario
+        let services = {};
+        let supabaseUrl = '';
+        const organizationName = userDoc.data().organization;
+        
+        if(userDoc.data().role === 'client') {
+          const orgRef = collection(firestore, 'organizations');
+          const orgQuery = query(orgRef, where('name', '==', organizationName));
+          const orgQuerySnapshot = await getDocs(orgQuery);
+          const orgDoc = orgQuerySnapshot.docs[0];
+          services = orgDoc.data().services;
+          supabaseUrl = orgDoc.data().supabaseUrl;
+        } else {
+          services = {};
+        }
+
         const payload = {
           isAuthenticated: true,
           user: {
@@ -87,7 +103,10 @@ export const AuthProvider = ({
             role: userDoc.data().role,
             email: user.email,
             avatar: user.photoURL,
-            name: `${userDoc.data().firstName} ${userDoc.data().lastName}`
+            name: `${userDoc.data().firstName} ${userDoc.data().lastName}`,
+            organization: organizationName,
+            services: services,
+            supabaseUrl: supabaseUrl
           }
         };
         dispatch({

@@ -5,7 +5,7 @@ import FlexBox from '@/components/flexbox/FlexBox';
 import { Paragraph, Span } from '@/components/typography';
 // STYLED COMPONENT
 import { Text } from './styles';
-export default function OutgoingMsg() {
+export default function OutgoingMsg({ message, date }) {
   return <Box alignSelf="end" maxWidth={{
     md: '60%',
     sm: '70%',
@@ -14,17 +14,17 @@ export default function OutgoingMsg() {
       <FlexBox justifyContent="end" alignItems="center" mb={1} gap={1.5}>
         <Paragraph fontWeight={600} lineHeight={1}>
           <Span ml={0.5} fontSize={12} fontWeight={400} color="text.secondary">
-            11:29 AM
+            {date.split('T')[1].split('.')[0]}
           </Span>{' '}
-          You
+          Agente IA
         </Paragraph>
 
-        <Avatar src="/static/user/user-11.png" sx={{
+        <Avatar src="" sx={{
         width: 27,
         height: 27
       }} />
       </FlexBox>
 
-      <Text>Sure! Ready to help.</Text>
+      <Text>{ message }</Text>
     </Box>;
 }

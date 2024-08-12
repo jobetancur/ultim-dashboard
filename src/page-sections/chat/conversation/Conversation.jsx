@@ -24,13 +24,15 @@ import { FlexBetween, FlexBox } from '@/components/flexbox';
 import Search from '@/icons/duotone/Search';
 // STYLED COMPONENTS
 import { AttachButton, StyledIconButton, ToggleBtn } from './styles';
+import {useRef, useEffect} from 'react';
 
 // ==============================================================
 
 // ==============================================================
 
 export default function Conversation({
-  handleOpen
+  handleOpen,
+  chatHistory
 }) {
   const {
     getRootProps,
@@ -40,16 +42,25 @@ export default function Conversation({
       // console.log(files);
     }
   });
+
+  // Crear una referencia para el contenedor de mensajes
+  const messagesEndRef = useRef(null);
+
+  // Hacer scroll al final cuando se agregue un nuevo mensaje
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatHistory]);
+
   return <Card className="h-full">
       <FlexBetween padding={3}>
         <FlexBox alignItems="center" gap={1.5}>
-          <Avatar src="/static/user/user-19.png" alt="" />
+          <Avatar src="" alt="" />
 
           <div>
             <H6 lineHeight={1} fontSize={16}>
-              Aiony Haust
+              {chatHistory[0]?.client_number}
             </H6>
-            <Small color="text.secondary">Online</Small>
+            {/* <Small color="text.secondary">Online</Small> */}
           </div>
         </FlexBox>
 
@@ -78,13 +89,15 @@ export default function Conversation({
         maxHeight: 580
       }}>
           <Stack spacing={4} px={3} py={2}>
-            <OutgoingMsg />
-            <IncomingMsg />
-            <OutgoingMsg />
-            <IncomingMsg />
-            <OutgoingMsg />
-            <IncomingMsg />
-            <OutgoingMsg />
+            {chatHistory[0].messages.map((msg, index) => {
+            if (msg.user === 'client_message') {
+              return <IncomingMsg key={index} message={msg.message} date={msg.date} />;
+            } else {
+              return <OutgoingMsg key={index} message={msg.message} date={msg.date} />;
+            }
+          })}
+          {/* Referencia para hacer scroll al final */}
+          <div ref={messagesEndRef} />
           </Stack>
         </Scrollbar>
       </Box>

@@ -23,6 +23,8 @@ export default function DashboardLayoutV1({
 
         {/* MAIN CONTENT RENDER SECTION */}
         {children || <Outlet />}
+        
+        {/* Acá vamos a poner la vista iniciar */}
 
         {/* LAYOUT SETTING SECTION */}
         <LayoutSetting />

@@ -22,6 +22,7 @@
     "@mui/x-date-pickers": "^7.2.0",
     "@mui/x-tree-view": "^7.3.0",
     "@south-paw/react-vector-maps": "^3.2.0",
+    "@supabase/supabase-js": "^2.45.1",
     "@tanstack/react-table": "^8.16.0",
     "apexcharts": "^3.48.0",
     "aws-amplify": "^5.3.4",
@@ -50,6 +51,7 @@
     "simplebar-react": "^3.2.4",
     "stylis": "^4.3.1",
     "stylis-plugin-rtl": "^2.1.1",
+    "supabase": "^1.187.10",
     "swiper": "^11.1.1",
     "yup": "^1.4.0"
   },

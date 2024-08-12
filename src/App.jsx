@@ -16,6 +16,9 @@ import { createCustomTheme } from './theme';
 import useSettings from '@/hooks/useSettings';
 // I18N FILE
 import './i18n';
+// SUPABASE PROVIDER
+import { SupabaseProvider } from '@/contexts/supabaseContext';
+
 export default function App() {
   // SITE SETTINGS CUSTOM DEFINED HOOK
   const {
@@ -30,10 +33,12 @@ export default function App() {
   return <LocalizationProvider dateAdapter={AdapterDateFns}>
       <ThemeProvider theme={theme}>
         <AuthProvider>
-          <RTL>
-            <CssBaseline />
-            <RouterProvider router={router} />
-          </RTL>
+          <SupabaseProvider>
+            <RTL>
+              <CssBaseline />
+              <RouterProvider router={router} />
+            </RTL>
+          </SupabaseProvider>
         </AuthProvider>
       </ThemeProvider>
     </LocalizationProvider>;
