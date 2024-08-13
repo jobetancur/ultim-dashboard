@@ -18,7 +18,7 @@ export default function IncomingMsg({ message, date }) {
       }} />
 
         <Paragraph fontWeight={600} lineHeight={1}>
-          Mensaje de usuario{' '}
+          Mensaje del usuario{' '}
           <Span ml={0.5} fontSize={12} fontWeight={400} color="text.secondary">
             {date.split('T')[1].split('.')[0]}
           </Span>
