@@ -42,6 +42,7 @@ export default function ChatPageView() {
   const [openLeftDrawer, setOpenLeftDrawer] = useState(false);
   const [selectedConversationId, setSelectedConversationId] = useState(null);
   const downMd = useMediaQuery(theme => theme.breakpoints.down('md'));
+  const [searchInputValue, setSearchInputValue] = useState('');
   const handleOpen = () => setOpenLeftDrawer(true);
 
     const supabaseUrl = user?.supabaseUrl;
@@ -78,6 +79,12 @@ export default function ChatPageView() {
 
   //  console.log(filteredChatHistory);
 
+  const handleSearchInputChange = e => {
+    e.preventDefault();
+    setSearchInputValue(e.target.value);
+  }
+  
+
   // RECENT CONVERSATION LIST
   const MESSAGE_CONTENT = <Card sx={{
     height: '100%',
@@ -92,7 +99,7 @@ export default function ChatPageView() {
           </StyledIconButton> */}
         </FlexBetween>
 
-        <StyledSearchInput placeholder="Search..." />
+        <StyledSearchInput placeholder="Search..." onChange={handleSearchInputChange} />
       </div>
 
       {/* PINNED ITEMS */}
@@ -101,10 +108,8 @@ export default function ChatPageView() {
       <Divider />
 
       {/* ALL MESSAGES */}
-      <AllMessages 
-        chatHistory={chatHistory}  
-        handlerChatClick={handlerChatClick}
-      />
+      {/* Filtrar chat con el input de buscador */}
+      <AllMessages chatHistory={chatHistory} searchInputValue={searchInputValue} handlerChatClick={handlerChatClick} />
 
     </Card>;
   return <div className="pt-2 pb-4">

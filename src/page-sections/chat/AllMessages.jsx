@@ -8,7 +8,7 @@ import FlexBox from '@/components/flexbox/FlexBox';
 import { Paragraph } from '@/components/typography';
 // CUSTOM DUMMY DATA
 
-export default function AllMessages({ chatHistory, handlerChatClick }) {
+export default function AllMessages({ chatHistory, handlerChatClick, searchInputValue }) {
 
   return <Box mt={3}>
       <FlexBox alignItems="center" gap={1} px={3} mb={1}>
@@ -24,7 +24,15 @@ export default function AllMessages({ chatHistory, handlerChatClick }) {
       <Scrollbar style={{
       maxHeight: 570
     }}>
-        {chatHistory.map(item => <ChatItem id={item.id} key={item.id} item={item} handlerChatClick={handlerChatClick} />)}
+        {
+          // Si searchInputValue está vacío, mapear chatHistory
+          // Si searchInputValue no está vacío, filtrar chatHistory
+          searchInputValue === '' ? 
+            chatHistory.map(item => <ChatItem id={item.id} key={item.id} item={item} handlerChatClick={handlerChatClick} />) 
+              : 
+            chatHistory.filter(item => item.client_number.toLowerCase().includes(searchInputValue.toLowerCase())).map(item => <ChatItem id={item.id} key={item.id} item={item} handlerChatClick={handlerChatClick} />) 
+          
+        }
         {/* {chatHistory.map(item => <ChatItem id={id} key={id} clientNumber={client_number} time={created_at} messages={messages} lastMsg={item.lastMsg} unseenMsg={item.unseenMsg} lastMsgSeen={item.lastMsgSeen} isLastMsgIncoming={item.isLastMsgIncoming} />)} */}
       </Scrollbar>
     </Box>;
