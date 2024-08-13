@@ -105,8 +105,8 @@ export default function Conversation({
       <Divider />
 
       <Box px={3} py={2}>
-        <FlexBetween mb={2} gap={2}>
-          <InputBase fullWidth multiline placeholder="Type Something....." sx={{
+        {/* <FlexBetween mb={2} gap={2}>
+          <InputBase disabled fullWidth multiline placeholder="Type Something....." sx={{
           fontSize: 14,
           fontWeight: 500,
           flex: 1
@@ -115,11 +115,11 @@ export default function Conversation({
           <StyledIconButton size="small">
             <Mic />
           </StyledIconButton>
-        </FlexBetween>
+        </FlexBetween> */}
 
         <FlexBetween gap={2}>
           <FlexBox gap={1.5}>
-            <AttachButton {...getRootProps()}>
+            {/* <AttachButton {...getRootProps()}>
               <input {...getInputProps()} />
               <CameraAlt fontSize="inherit" />
             </AttachButton>
@@ -127,14 +127,14 @@ export default function Conversation({
             <AttachButton {...getRootProps()}>
               <input {...getInputProps()} />
               <AttachFile fontSize="inherit" />
-            </AttachButton>
+            </AttachButton> */}
 
-            <StyledIconButton size="small">
+            {/* <StyledIconButton size="small">
               <Add fontSize="small" />
-            </StyledIconButton>
+            </StyledIconButton> */}
           </FlexBox>
 
-          <Button size="small">Send</Button>
+          {/* <Button disabled size="small">Send</Button> */}
         </FlexBetween>
       </Box>
     </Card>;
