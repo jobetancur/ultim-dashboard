@@ -1,38 +1,74 @@
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 // CUSTOM PAGE SECTION COMPONENTS
+import Footer from '../../_common/Footer';
+import TopQueries from '../TopQueries';
+import TopReferral from '../TopReferral';
+import ChartFilters from '../ChartFilters';
+import CompleteGoal from '../CompleteGoal';
+import CompleteRate from '../CompleteRate';
+import TopPerforming from '../TopPerforming';
+import SessionBrowser from '../SessionBrowser';
+import SalesByCountry from '../SalesByCountry';
+import AveragePosition from '../AveragePosition';
+export default function Analytics2PageView() {
+  return <div className="pt-2 pb-4">
+      <Grid container spacing={3}>
+        {/* AVERAGE POSITION CHART CARD */}
+        <Grid item md={4} xs={12}>
+          <AveragePosition />
+        </Grid>
 
-import { AuthContext } from '@/contexts/firebaseContext';
-import { useContext } from 'react';
+        {/* DIFFERENT DATA SHOW WITH CHART */}
+        <Grid item md={8} xs={12}>
+          <ChartFilters type="line" />
+        </Grid>
 
-export default function Analytics1PageView() {
+        {/* VISIT BY TOP REFERRAL SOURCE CHART CARD */}
+        <Grid item md={8} xs={12}>
+          <TopReferral />
+        </Grid>
 
-  const { user } = useContext(AuthContext);
+        {/* SESSION BY BROWSER CHART CARD */}
+        <Grid item md={4} xs={12}>
+          <SessionBrowser />
+        </Grid>
 
-  const { role, organization, services } = user;
+        {/* COMPLETE GOAL AND RATES CARDS */}
+        <Grid item lg={3} xs={12}>
+          <Stack spacing={3} sx={{
+          '& > div': {
+            flex: 1
+          }
+        }} direction={{
+          lg: 'column',
+          sm: 'row',
+          xs: 'column'
+        }}>
+            <CompleteGoal chart="area" />
+            <CompleteRate />
+          </Stack>
+        </Grid>
 
-  // console.log(services);
+        {/* SALES BY COUNTRY CHART CARD */}
+        <Grid item lg={9} xs={12}>
+          <SalesByCountry chartHorizontal />
+        </Grid>
 
-  if(role === 'client') {
-    return <div className="pt-2 pb-4">
-      <h1>{organization}</h1>
-      <h2>Tus servicios</h2>
-      <Grid container spacing={2}>
-        {
-          services.chat && <Grid item xs={12} md={6}> Chat </Grid>
-        }
-        {
-          services.email && <Grid item xs={12} md={6}> Email </Grid>
-        }
-        {
-          services.sms && <Grid item xs={12} md={6}> SMS </Grid>
-        }
+        {/* TOP PERFORMING PAGE TABLE CARD */}
+        <Grid item md={6} xs={12}>
+          <TopPerforming />
+        </Grid>
+
+        {/* TOP QUERIES TABLE CARD */}
+        <Grid item md={6} xs={12}>
+          <TopQueries />
+        </Grid>
+
+        {/* FOOTER CARD */}
+        <Grid item xs={12}>
+          <Footer />
+        </Grid>
       </Grid>
-
     </div>;
-  } else if (role === 'super-admin') {
-    return <div className="pt-2 pb-4">
-      <h1>Admin Dashboard</h1>
-    </div>;
-  }
 }
