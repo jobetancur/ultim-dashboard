@@ -65,6 +65,7 @@ const CreateTicket = Loadable(lazy(() => import('@/pages/dashboard/support/creat
 
 // CHAT PAGE
 const Chat = Loadable(lazy(() => import('@/pages/dashboard/chat')));
+const ChatDocuments = Loadable(lazy(() => import('@/pages/dashboard/chat/chat-documents')));
 
 // USER TODO LIST PAGE
 const TodoList = Loadable(lazy(() => import('@/pages/dashboard/todo-list')));
@@ -212,8 +213,14 @@ export const DashboardRoutes = [{
     path: 'create-ticket',
     element: <CreateTicket />
   }, {
-    path: 'chat',
-    element: <Chat />
+    path: 'chats',
+    children: [{
+      path: 'chat',
+      element: <Chat />
+    }, {
+      path: 'chat-documents',
+      element: <ChatDocuments />
+    }]
   }, {
     path: 'todo-list',
     element: <TodoList />

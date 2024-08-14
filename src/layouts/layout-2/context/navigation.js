@@ -136,7 +136,14 @@ export const navigation = [{
 }, {
   name: 'Chats',
   Icon: duotone.Chat,
-  path: '/dashboard/chat'
+  children: [{
+    name: 'Chat',
+    path: '/dashboard/chats/chat'
+  }, {
+    name: 'Documentos',
+    path: '/dashboard/chats/chat-documents'
+  }
+]
 }, {
   name: 'Email',
   Icon: duotone.Inbox,
