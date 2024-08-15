@@ -229,18 +229,41 @@ export const navigations = [
       },
     ],
   },
+  // Esto es una idea de la integración de los chats de ejemplos dentro de la plataforma con el rol de super-admin.
   {
     type: "label",
-    label: "Apps",
+    label: "Demos",
+    access: "super-admin",
   },
-  // {
-  //   name: "Todo List",
-  //   icon: duotone.TodoList,
-  //   path: "/dashboard/todo-list",
-  // },
   {
     name: "Chats",
     icon: duotone.Chat,
+    access: "super-admin",
+    children: [
+      {
+        name: "Cobros",
+        path: "/dashboard/chats/cobros",
+      },
+      {
+        name: "Citas",
+        path: "/dashboard/chats/citas",
+      },
+      {
+        name: "Atención al Cliente",
+        path: "/dashboard/chats/atencion-cliente",
+      }
+    ],
+  },
+  // --------------------------------------------------------------
+  {
+    type: "label",
+    label: "Apps",
+    access: "client",
+  },
+  {
+    name: "Chats",
+    icon: duotone.Chat,
+    access: "client",
     children: [
       {
         name: "Chat",
@@ -255,6 +278,7 @@ export const navigations = [
   {
     name: "Email",
     icon: duotone.Inbox,
+    access: "client",
     children: [
       {
         name: "Inbox",
@@ -273,6 +297,7 @@ export const navigations = [
   {
     name: "SMS",
     icon: duotone.Pages,
+    access: "client",
     children: [
       {
         name: "About",

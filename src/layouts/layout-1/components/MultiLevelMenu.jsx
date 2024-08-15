@@ -33,6 +33,8 @@ export default function MultiLevelMenu({
     handleCloseMobileSidebar
   } = useLayout();
 
+  console.log('user sidebar', user); // HANDLE ACTIVE CURRENT PAGE
+
   // HANDLE ACTIVE CURRENT PAGE
   const activeRoute = path => pathname === path ? 1 : 0;
 
@@ -85,9 +87,17 @@ export default function MultiLevelMenu({
   };
 
   // USER ROLE BASED ON FILTER NAVIGATION
+  // Acá se define el filtro de navegación basado en el rol del usuario. Se debe establecer el rol del usuario en el objeto de navegación con la clave "access". El archivo se llama navigation.jsx y se encuentra en la carpeta src/layouts/layout-parts.
+
   const filterNavigation = useMemo(() => {
     return navigations.filter(navigation => {
-      if (!navigation.access) return true;else if (navigation.access === user?.role) return true;else return false;
+      if (!navigation.access){
+        return true;
+      } else if (navigation.access === user?.role) {
+        return true;
+      } else {
+        return false;
+      }
     });
   }, [user?.role]);
   return <>{renderLevels(filterNavigation)}</>;
